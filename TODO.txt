@@ -1,0 +1,1 @@
+Ended at event system while working on Event.h, just after declaring the Event class.
