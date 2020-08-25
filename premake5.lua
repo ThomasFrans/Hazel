@@ -13,6 +13,13 @@ workspace "Hazel"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"		-- So something like: Debug-Windows-x64
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Hazel/vendor/GLFW/include"
+
+-- Like c++ preprocessor include, just takes premake lua file from this directory and pastes it here.
+include "Hazel/vendor/GLFW"
+
 project "Hazel"
 
 	location "Hazel"		-- Define a relative path as to which all the other locations are relative to
@@ -36,7 +43,14 @@ project "Hazel"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	-- Everything under filter only for that filter untill other filter, indentation doesn't matter
