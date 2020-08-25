@@ -1,6 +1,7 @@
 // The wrapper class for the logging library we currently use, called spdlog
 // The wrapper facilitates switching library without having to adjust all the code for Hazel
 
+#include "hzpch.h"
 #include "Log.h"
 
 #include "spdlog/sinks/stdout_color_sinks.h"

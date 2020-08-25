@@ -22,6 +22,9 @@ project "Hazel"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")		-- Binary folder
 	objdir ("bin/" .. outputdir .. "/%{prj.name}")			-- Intermidiate binary folder
 
+	pchheader "hzpch.h"
+	pchsource "Hazel/src/hzpch.cpp"
+
 	-- What files to add
 	files
 	{
@@ -32,6 +35,7 @@ project "Hazel"
 	-- What libs to include
 	includedirs
 	{
+		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include"
 	}
 
