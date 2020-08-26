@@ -1,13 +1,33 @@
 #include <Hazel.h>
 
-// Sandbox is the CLIENT subclass of Application class in the Hazel namespace
+class ExampleLayer : public Hazel::Layer
+{
+public:
+	ExampleLayer()
+		: Layer("Example")
+	{
+	}
+
+	void OnUpdate() override
+	{
+		HZ_INFO("ExampleLayer::Update");
+	}
+
+	void OnEvent(Hazel::Event& event) override
+	{
+		HZ_TRACE("{0}", event);
+	}
+
+};
+
+// Sandbox is the equivalent of a user trying to use our game engine.
 class Sandbox : public Hazel::Application
 {
 public:
 
 	Sandbox()
 	{
-
+		PushLayer(new ExampleLayer());
 	}
 
 	~Sandbox()

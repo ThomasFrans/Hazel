@@ -37,8 +37,8 @@ namespace Hazel {
 
 	class HAZEL_API Event
 	{
-		friend class EventDispatcher;		// Friend just means the EventDispatcher class has direct access to the protected and private parts of this class
 	public:
+		bool Handled = false;						// Every event should hold if it has been handled
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;						// Only for debugging purpose
 		virtual int GetCategoryFlags() const = 0;						// Only for debugging purpose
@@ -48,8 +48,6 @@ namespace Hazel {
 		{
 			return GetCategoryFlags() & category;
 		}
-	protected:
-		bool m_Handled = false;						// Every event should hold if it has been handled
 	};
 
 	class EventDispatcher
@@ -68,7 +66,7 @@ namespace Hazel {
 		{
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.m_Handled = func(*(T*)&m_Event);
+				m_Event.Handled = func(*(T*)&m_Event);
 				return true;
 			}
 			return false;
