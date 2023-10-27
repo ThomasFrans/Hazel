@@ -1,5 +1,6 @@
 #include "hzpch.h"
 #include "Application.h"
+#include "GLFW\glfw3.h"
 
 #include "Hazel/Log.h"
 
@@ -16,6 +17,7 @@ namespace Hazel {
 	{
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+		m_PreviousTime = 0.0;
 	}
 
 	Application::~Application()
@@ -54,6 +56,10 @@ namespace Hazel {
 		{
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			double currentTime = glfwGetTime();
+			HZ_CORE_INFO("Frametime: {0}", (int)((currentTime - m_PreviousTime) * 1000));
+			m_PreviousTime = currentTime;
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();

@@ -29,6 +29,8 @@ namespace Hazel {
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+		double m_PreviousTime;
+		double m_SecondCounter;
 	};
 
 	// To be defined in CLIENT

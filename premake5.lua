@@ -11,16 +11,20 @@ workspace "Hazel"
 		"Dist"			-- Optimization, loggin off			Final build
 	}
 
-outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"		-- So something like: Debug-Windows-x64
+	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"		-- So something like: Debug-Windows-x64
 
--- Include directories relative to root folder (solution directory)
-IncludeDir = {}
-IncludeDir["GLFW"] = "Hazel/vendor/GLFW/include"
-IncludeDir["Glad"] = "Hazel/vendor/Glad/include"
+	startproject "Sandbox"
+	-- Include directories relative to root folder (solution directory)
+	IncludeDir = {}
+	IncludeDir["GLFW"] = "Hazel/vendor/GLFW/include"
+	IncludeDir["Glad"] = "Hazel/vendor/Glad/include"
+	IncludeDir["ImGui"] = "Hazel/vendor/imgui"
 
--- Like c++ preprocessor include, just takes premake lua file from this directory and pastes it here.
-include "Hazel/vendor/GLFW"
-include "Hazel/vendor/Glad"
+	-- Like c++ preprocessor include, just takes premake lua file from this directory and pastes it here.
+	include "Hazel/vendor/GLFW"
+	include "Hazel/vendor/Glad"
+	include "Hazel/vendor/imgui"
+
 
 project "Hazel"
 
@@ -47,13 +51,15 @@ project "Hazel"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
 	{
 		"GLFW",
 		"Glad",
+		"ImGui",
 		"opengl32.lib"
 	}
 
